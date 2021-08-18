@@ -1,33 +1,80 @@
 const slider = () => {
+  const sliderData = [
+    {
+      img: "assets/images/hero-image.jpeg",
+    },
+    {
+      img: "assets/images/hero-image.jpeg",
+    },
+    {
+      img: "assets/images/hero-image.jpeg",
+    },
+    {
+      img: "assets/images/hero-image.jpeg",
+    },
+    {
+      img: "assets/images/hero-image.jpeg",
+    },
+  ];
+
   const carouselSlide = document.querySelector(".carousel-slide");
-  const carouselImages = document.querySelectorAll(".carousel-item");
-  const numberOfImages = carouselImages.length;
 
-  // buttons
-  const prevBtn = document.querySelector("#carousel-prevBtn");
-  const nextBtn = document.querySelector("#carousel-nextBtn");
+  const createSlider = (imgSrc) => {
+    // create elements
+    const sliderItem = document.createElement("div");
+    const sliderItemImg = document.createElement("img");
 
-  // counter
-  let counter = 1;
-  const size = carouselImages[0].clientWidth;
-  carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+    // add classes
+    sliderItem.classList.add("carousel-item");
 
-  // Button Listener
-  nextBtn.addEventListener("click", () => {
-    if (counter + 1 < numberOfImages) {
-      carouselSlide.style.transition = "transform 0.4s ease-in-out";
-      counter++;
-      carouselSlide.style.transform = `translateX(${-size * counter}px)`;
-    }
-  });
+    // arrange
+    sliderItem.appendChild(sliderItemImg);
 
-  prevBtn.addEventListener("click", () => {
-    if (counter > 0) {
-      carouselSlide.style.transition = "transform 0.4s ease-in-out";
-      counter--;
-      carouselSlide.style.transform = `translateX(${-size * counter}px)`;
-    }
-  });
+    // add content
+    sliderItemImg.src = imgSrc;
+
+    return sliderItem;
+  };
+
+  const addSliders = () => {
+    sliderData.forEach((slider) => {
+      const imgSrc = slider.img;
+      carouselSlide.appendChild(createSlider(imgSrc));
+    });
+  };
+
+  const sliderHandler = () => {
+    // buttons
+    const prevBtn = document.querySelector("#carousel-prevBtn");
+    const nextBtn = document.querySelector("#carousel-nextBtn");
+
+    // counter
+    const carouselImages = document.querySelectorAll(".carousel-item");
+    let counter = 1;
+    const numberOfImages = sliderData.length;
+    const size = carouselImages[0].clientWidth;
+    carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+
+    // Button functionality
+    nextBtn.addEventListener("click", () => {
+      if (counter + 1 < numberOfImages) {
+        carouselSlide.style.transition = "transform 0.4s ease-in-out";
+        counter++;
+        carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+      }
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (counter > 0) {
+        carouselSlide.style.transition = "transform 0.4s ease-in-out";
+        counter--;
+        carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+      }
+    });
+  };
+
+  addSliders();
+  sliderHandler();
 };
 
 // services
@@ -93,49 +140,62 @@ const services = (servicesData) => {
   });
 };
 
-services(servicesData);
-
 // Modal
-const modalContainer = document.querySelector(".modal");
-const servicesItem = document.querySelectorAll(".services-item");
-const closeButtonModal = document.querySelector(".modal-container-close");
+const modal = () => {
+  // elements
+  const modalContainer = document.querySelector(".modal");
+  const servicesItem = document.querySelectorAll(".services-item");
+  const closeButtonModal = document.querySelector(".modal-container-close");
+  const modalBackground = document.querySelector(".modal-background");
 
-const modalDataHandler = (order)=>{
+  const modalContainerHeading = document.querySelector(
+    ".modal-container-heading"
+  );
+  const modalContainerImg = document.querySelector(
+    ".modal-container-image img"
+  );
+  const modalContainerContent = document.querySelector(
+    ".modal-container-content"
+  );
+
+  // functions
+  const modalDataHandler = (order) => {
     // Data
     const title = servicesData[order].title;
-    const imgSrc = servicesData[order].imgSrc
-    const description = servicesData[order].description
+    const imgSrc = servicesData[order].imgSrc;
+    const description = servicesData[order].description;
 
-    // elements
-    const modalContainerHeading = document.querySelector(".modal-container-heading")
-    const modalContainerImg = document.querySelector(".modal-container-image img")
-    const modalContainerContent = document.querySelector(".modal-container-content")
-    
     // Content
     modalContainerHeading.innerHTML = title;
     modalContainerImg.src = imgSrc;
     modalContainerContent.innerHTML = description;
-}
+  };
 
-const modalOpenHandler = (order) => {
-  modalContainer.style.display = "flex";
-  modalDataHandler(order);
-};
+  const modalOpenHandler = (order) => {
+    modalContainer.style.display = "flex";
+    modalDataHandler(order);
+  };
 
-const modalCloseHandler = () => {
-  const modalContainer = document.querySelector(".modal");
-  modalContainer.style.display = "none";
-};
+  const modalCloseHandler = () => {
+    modalContainer.style.display = "none";
 
-Array.from(servicesItem).forEach((service) => {
-  service.addEventListener("click", (e) => {
-    const order = e.target.dataset.order;
-    modalOpenHandler(order);
+    // Content
+    modalContainerHeading.innerHTML = "";
+    modalContainerImg.src = "";
+    modalContainerContent.innerHTML = "";
+  };
+
+  Array.from(servicesItem).forEach((service) => {
+    service.addEventListener("click", (e) => {
+      const order = e.target.dataset.order;
+      modalOpenHandler(order);
+    });
   });
-});
 
-closeButtonModal.addEventListener("click", () => modalCloseHandler());
+  closeButtonModal.addEventListener("click", () => modalCloseHandler());
+  modalBackground.addEventListener("click", () => modalCloseHandler());
+};
 
+services(servicesData);
+modal();
 slider();
-
-

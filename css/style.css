@@ -12,6 +12,8 @@ body {
   padding: 15px 13%;
 }
 
+/* NAV START */
+
 .top-nav {
   width: 100%;
   display: flex;
@@ -27,7 +29,11 @@ body {
   width: 115px;
 }
 
-/*  */
+/* NAV END */
+
+/* ************************************************************************************* */
+
+/* CAROUSEL START */
 
 .carousel-container {
   height: 113.2vh;
@@ -72,7 +78,12 @@ body {
 .carousel-actions button:hover {
   opacity: 100%;
 }
-/*  */
+
+/* CAROUSEL END */
+
+/* ************************************************************************************* */
+
+/* SERVICES START */
 
 .services-container {
   padding: 10px 0;
@@ -115,7 +126,11 @@ body {
   background-color: #ddd;
 }
 
-/*  */
+/* SERVICES END */
+
+/* ************************************************************************************* */
+
+/* Form START */
 
 .ford-form {
   padding: 20px;
@@ -200,6 +215,11 @@ body {
   width: 100%;
 }
 
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
 /*  */
 
 .modal {
@@ -244,11 +264,11 @@ body {
   justify-content: space-between;
 }
 
-.modal-container-close{
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    font-size: 18px;
+.modal-container-close {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 .modal-container-content {
@@ -257,4 +277,99 @@ body {
   font-size: 18px;
   padding: 15px;
   background: #fff;
+}
+
+/* tablet */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+  /* NAV START */
+  .nav-logo img {
+    display: block;
+    width: 100px;
+  }
+  /* NAV END */
+
+  /* CAROUSEL START */
+  .carousel-container {
+    height: 42.2vh;
+    overflow: hidden;
+  }
+
+  .carousel-actions button{
+      font-size: 50px;
+  }
+
+  .carousel-actions {
+    top: 25%;
+  }
+  /* CAROUSEL END */
+
+  /* SERVICES START */
+  .services-item-content {
+    font-size: 16px;
+    padding: 18px;
+  }
+
+  .services-item-img img {
+    height: 100%;
+    width: auto;
+  }
+  /* SERVICES END */
+
+  /* FOOTER START */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .footer-logo {
+    margin: 20px auto;
+  }
+  /* FOOTER END */
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  /* NAV START */
+  .nav-logo img {
+    display: block;
+    width: 70px;
+  }
+  /* NAV END */
+
+  /* CAROUSEL START */
+  .carousel-container {
+    height: 26.5vh;
+    overflow: hidden;
+  }
+
+  .carousel-actions {
+    top: 19%;
+  }
+
+  /* CAROUSEL END */
+
+  /* SERVICES START */
+  .services-container {
+    padding: 20px 30px;
+    display: grid;
+    grid-gap: 40px;
+    justify-items: center;
+    grid-template-columns: 1fr;
+  }
+  /* SERVICES END */
+
+  /* FOOTER START */
+  .footer {
+    font-size: 14px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .footer-logo {
+    margin: 20px auto;
+  }
+  /* FOOTER END */
 }
